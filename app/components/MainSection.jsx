@@ -6,7 +6,7 @@ import Review from "./Review";
 
 const MainSection = () => {
   return (
-    <section>
+    <section className="flex flex-col w-full h-fit pt-16">
       <PopularFoods />
       <Category />
       <Menu />
