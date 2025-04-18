@@ -15,8 +15,10 @@ const Footer = () => {
           <FaInstagram />
         </div>
       </div>
-      <hr />
-      <h1 className="text-center pt-5">Copyright © All Right Reserved</h1>
+      <hr className="bg-[#999]" />
+      <h1 className="text-center text-[#888888] pt-5">
+        Copyright © All Right Reserved
+      </h1>
     </div>
   );
 };

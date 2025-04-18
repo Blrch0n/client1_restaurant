@@ -1,3 +1,4 @@
+import { IoAddCircleOutline } from "react-icons/io5";
 const dataoffoods = [
   {
     img: "https://astylers.com/mobile/aaem/images/food1.jpg",
@@ -103,13 +104,20 @@ const TypeOfFoods = ({ foodType }) => {
         .filter((data) => data.type === foodType.toLowerCase())
         .map((data, index) => (
           <div
-            className="w-full h-fit flex flex-col rounded-[8px] overflow-hidden"
+            className="w-full h-fit flex flex-col bg-white rounded-[8px]  overflow-hidden"
             key={index}
           >
             <img src={data.img} alt="image" />
-            <div className="w-full h-fit flex flex-col gap-2">
-              <h1>Meat Mix Foliage</h1>
-              <h1>${data.price}</h1>
+            <div className="w-full h-fit p-2.5 flex flex-col gap-[3px]">
+              <h1 className="font-semibold text-[14px] text-[#333] font-roboto">
+                Meat Mix Foliage
+              </h1>
+              <div className="w-full h-fit flex flex-row justify-between">
+                <h1 className="font-semibold text-[14px] text-[#ff4301] font-roboto">
+                  ${data.price}
+                </h1>
+                <IoAddCircleOutline />
+              </div>
             </div>
           </div>
         ))}

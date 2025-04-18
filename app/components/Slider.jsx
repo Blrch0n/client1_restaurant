@@ -67,24 +67,26 @@ export default function SimpleSlider() {
       >
         {sliderData.map((data, index) => (
           <div
-            className="relative w-full h-[230px] cursor-pointer"
-            onClick={() => sliderRef.current?.slickNext()}
             key={index}
+            onClick={() => sliderRef.current?.slickNext()}
+            className="relative w-full h-[230px] cursor-pointer rounded-[8px] overflow-hidden"
           >
+            {/* 1. Background image */}
             <div
-              className="absolute inset-0 z-10 bg-[#000000ea]"
-              style={{
-                backgroundImage: `url(${data.img})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-            <div className="relative px-6 z-20 gap-2.5 flex flex-col items-center justify-center h-full text-white text-center">
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${data.img})` }}
+            />
+
+            {/* 2. Black overlay at 50% */}
+            <div className="absolute inset-0 bg-black/50" />
+
+            {/* 3. Slide content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
               <h1 className="text-lg font-berkshire-swash font-bold">
                 {data.title}
               </h1>
               <p className="text-sm">{data.paragraph}</p>
-              <button className="bg-[#ff4301] text-white px-3 py-1 rounded-full mt-2">
+              <button className="mt-2 rounded-full bg-[#ff4301] px-3 py-1 text-white">
                 {data.button_label}
               </button>
             </div>
