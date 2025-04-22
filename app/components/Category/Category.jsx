@@ -11,7 +11,7 @@ const Category = () => {
         </h1>
         <a
           href="/categoryAll"
-          className="text-[#ff4101] flex flex-row items-center"
+          className="text-[#ff4101] flex font-roboto flex-row items-center"
         >
           See All <MdOutlineKeyboardArrowRight />
         </a>

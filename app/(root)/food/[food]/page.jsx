@@ -23,7 +23,7 @@ const Page = () => {
     toast.success(`${firstMatch.name} added to cart`);
   };
   return (
-    <section className="w-full flex text-black flex-col px-5 pb-5 pt-[80px] h-fit bg-white">
+    <section className="w-full flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] h-fit bg-white">
       <div className="w-full h-fit flex flex-col">
         <img
           src={firstMatch.img}

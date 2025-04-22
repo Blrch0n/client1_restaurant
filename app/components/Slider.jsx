@@ -112,8 +112,8 @@ export default function SimpleSlider() {
               <h1 className="text-lg font-berkshire-swash font-bold">
                 {data.title}
               </h1>
-              <p className="text-sm">{data.paragraph}</p>
-              <button className="mt-2 rounded-full bg-[#ff4301] px-3 py-1 text-white">
+              <p className="text-sm font-roboto">{data.paragraph}</p>
+              <button className="mt-2 font-roboto rounded-full bg-[#ff4301] px-3 py-1 text-white">
                 {data.button_label}
               </button>
             </div>
