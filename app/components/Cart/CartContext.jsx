@@ -1,10 +1,35 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+
+  // Load from localStorage on client only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem("cart");
+        if (stored) {
+          setItems(JSON.parse(stored));
+        }
+      } catch (error) {
+        console.error("Failed to load cart from localStorage", error);
+      }
+    }
+  }, []);
+
+  // Save to localStorage when items change
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("cart", JSON.stringify(items));
+      } catch (error) {
+        console.error("Failed to save cart to localStorage", error);
+      }
+    }
+  }, [items]);
 
   const addToCart = (newItem) => {
     setItems((curr) => {

@@ -1,5 +1,15 @@
+import { Toaster } from "react-hot-toast";
+import { CartProvider } from "../components/Cart/CartContext";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 export default function RootLayout({ children }) {
   return (
-    <section className="w-full h-fit text-black bg-white">{children}</section>
+    <CartProvider>
+      <Toaster position="bottom-center" />
+      <Header />
+      {children}
+      <Footer />
+    </CartProvider>
   );
 }

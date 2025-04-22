@@ -1,21 +1,14 @@
-import React, { useState } from "react";
-import { IoAddCircleOutline, IoCheckmarkCircleOutline } from "react-icons/io5";
+"use client";
+import { IoAddCircleOutline } from "react-icons/io5";
 import { useCart } from "../Cart/CartContext";
 import toast from "react-hot-toast";
 
 export default function FoodCard({ item }) {
   const { addToCart } = useCart();
-  const [justAdded, setJustAdded] = useState(false);
 
   const handleAdd = (e) => {
-    // 1) prevent parent onClick from also firing
     e.stopPropagation();
-    console.log("clicked");
 
-    // 2) block if we're already in our 200ms “justAdded” window
-    if (justAdded) return;
-
-    // 3) do the add
     addToCart({
       id: item.id,
       title: item.name,
@@ -24,10 +17,6 @@ export default function FoodCard({ item }) {
     });
 
     toast.success(`${item.name} added to cart`);
-
-    // 4) show the checkmark briefly
-    setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 200);
   };
 
   return (
@@ -45,25 +34,15 @@ export default function FoodCard({ item }) {
             ${item.price}
           </span>
 
-          {/* only this button handles clicks now */}
           <button
             onClick={handleAdd}
-            disabled={justAdded}
             className="relative w-6 h-6 disabled:opacity-50"
           >
-            {justAdded ? (
-              <IoCheckmarkCircleOutline
-                className="absolute inset-0 w-full h-full  
-                           text-green-500 transition-transform 
-                           duration-200 transform scale-125"
-              />
-            ) : (
-              <IoAddCircleOutline
-                className="absolute inset-0 w-full h-full 
+            <IoAddCircleOutline
+              className="absolute inset-0 w-full h-full 
                            text-gray-600 hover:text-gray-800 
                            transition-transform duration-200"
-              />
-            )}
+            />
           </button>
         </div>
       </div>
