@@ -6,7 +6,6 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
 
-  // Load from localStorage on client only
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
@@ -20,7 +19,6 @@ export function CartProvider({ children }) {
     }
   }, []);
 
-  // Save to localStorage when items change
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
@@ -44,21 +42,19 @@ export function CartProvider({ children }) {
     });
   };
 
-  // ← NEW: bump quantity by 1 for the given id
   const increaseQuantity = (id) => {
     setItems((curr) =>
       curr.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i))
     );
-  }; // :contentReference[oaicite:0]{index=0}
+  };
 
-  // ← NEW: subtract 1, and if it hits 0 filter it out
   const decreaseQuantity = (id) => {
     setItems((curr) =>
       curr
         .map((i) => (i.id === id ? { ...i, quantity: i.quantity - 1 } : i))
         .filter((i) => i.quantity > 0)
     );
-  }; // :contentReference[oaicite:1]{index=1}
+  };
 
   const removeFromCart = (id) => {
     setItems((curr) => curr.filter((i) => i.id !== id));

@@ -9,7 +9,7 @@ export default function FoodCard({ item }) {
 
   const handleAdd = (e) => {
     e.stopPropagation();
-
+    e.preventDefault();
     addToCart({
       id: item.id,
       title: item.name,

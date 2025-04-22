@@ -92,13 +92,13 @@ export default function SimpleSlider() {
       <Slider
         ref={sliderRef}
         {...settings}
-        className="w-full h-[230px] bg-white text-black"
+        className="w-full h-[230px] sm:h-[300px] lg:h-[500px] bg-white text-black"
       >
         {sliderData.map((data, index) => (
           <div
             key={index}
             onClick={() => sliderRef.current?.slickNext()}
-            className="relative w-full h-[230px] cursor-pointer rounded-[8px] overflow-hidden"
+            className="relative w-full h-[230px] sm:h-[300px] lg:h-[500px] cursor-pointer rounded-[8px] overflow-hidden"
           >
             {/* background image */}
             <div

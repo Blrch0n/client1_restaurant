@@ -25,7 +25,7 @@ export default function CartPanel({ open, onClose }) {
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
       <div
-        className={`fixed inset-y-0 right-0 text-black w-full bg-white h-full p-4 overflow-y-auto 
+        className={`fixed inset-y-0 right-0 text-black w-full lg:w-[80vw] bg-white h-full p-4 overflow-y-auto 
                     transform transition-transform duration-300
                     ${open ? "translate-x-0" : "translate-x-full"}`}
       >
