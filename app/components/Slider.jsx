@@ -28,6 +28,24 @@ const sliderData = [
   },
 ];
 
+// Custom Next arrow
+const NextArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{ ...style, display: "block", right: 16, zIndex: 2 }}
+    onClick={onClick}
+  />
+);
+
+// Custom Prev arrow
+const PrevArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{ ...style, display: "block", left: 16, zIndex: 2 }}
+    onClick={onClick}
+  />
+);
+
 export default function SimpleSlider() {
   const sliderRef = useRef(null);
 
@@ -37,8 +55,19 @@ export default function SimpleSlider() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+
+    // === autoplay settings ===
+    autoplay: true,
+    autoplaySpeed: 3000, // 3 seconds
+    pauseOnHover: true,
+
+    // === custom arrows ===
+    // nextArrow: <NextArrow />,
+    // prevArrow: <PrevArrow />,
+
+    // === custom dots styling ===
     appendDots: (dots) => (
-      <div style={{ position: "absolute", bottom: "8px", width: "100%" }}>
+      <div style={{ position: "absolute", bottom: 8, width: "100%" }}>
         <ul
           style={{
             display: "flex",
@@ -52,7 +81,7 @@ export default function SimpleSlider() {
         </ul>
       </div>
     ),
-    customPaging: (i) => <button className="dot"></button>,
+    customPaging: () => <button className="dot" />,
   };
 
   return (
@@ -71,16 +100,14 @@ export default function SimpleSlider() {
             onClick={() => sliderRef.current?.slickNext()}
             className="relative w-full h-[230px] cursor-pointer rounded-[8px] overflow-hidden"
           >
-            {/* 1. Background image */}
+            {/* background image */}
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${data.img})` }}
             />
-
-            {/* 2. Black overlay at 50% */}
+            {/* dark overlay */}
             <div className="absolute inset-0 bg-black/50" />
-
-            {/* 3. Slide content */}
+            {/* content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
               <h1 className="text-lg font-berkshire-swash font-bold">
                 {data.title}

@@ -15,6 +15,7 @@ const Footer = () => {
           <FaInstagram />
         </div>
       </div>
+
       <hr className="bg-[#999]" />
       <h1 className="text-center text-[#888888] pt-5">
         Copyright © All Right Reserved
