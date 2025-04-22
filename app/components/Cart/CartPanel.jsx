@@ -3,6 +3,7 @@ import React from "react";
 import { FiX } from "react-icons/fi";
 import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function CartPanel({ open, onClose }) {
   const {
@@ -55,7 +56,10 @@ export default function CartPanel({ open, onClose }) {
                   </div>
                   <button
                     className="text-red-500"
-                    onClick={() => removeFromCart(i.id)}
+                    onClick={() => {
+                      removeFromCart(i.id);
+                      toast.success(`${i.title} removed from cart`);
+                    }}
                   >
                     <FaTimes />
                   </button>
@@ -65,17 +69,23 @@ export default function CartPanel({ open, onClose }) {
                 </div>
                 <div className="w-fit flex items-center justify-between">
                   <span className="w-20 mr-2">Quantity</span>
-                  <div className="flex items-center w-fit gap-2">
+                  <div className="flex items-center w-fit gap-4">
                     <button
-                      onClick={() => decreaseQuantity(i.id)}
-                      className="w-5 h-5 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
+                      onClick={() => {
+                        decreaseQuantity(i.id);
+                        toast.success(`${i.title} quantity decreased`);
+                      }}
+                      className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
                     >
                       -
                     </button>
                     {i.quantity}
                     <button
-                      onClick={() => increaseQuantity(i.id)}
-                      className="w-5 h-5 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
+                      onClick={() => {
+                        increaseQuantity(i.id);
+                        toast.success(`${i.title} quantity increased`);
+                      }}
+                      className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
                     >
                       +
                     </button>
@@ -99,7 +109,13 @@ export default function CartPanel({ open, onClose }) {
                 <p>Total</p>
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
-              <button className="bg-[#ff4301] text-white p-2 rounded-full">
+              <button
+                className="bg-[#ff4301] text-white p-2 rounded-full"
+                onClick={() => {
+                  onClose();
+                  toast.success("Proceeding to checkout");
+                }}
+              >
                 Proceed to Checkout
               </button>
             </div>

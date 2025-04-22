@@ -111,6 +111,62 @@ const dataoffoods = [
     price: 20,
     type: "dessert",
   },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert1.jpg",
+    id: 17,
+    name: "Pandan Bread",
+    price: 20,
+    type: "breakfast",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert2.jpg",
+    id: 18,
+    name: "Pandan Bread",
+    price: 20,
+    type: "breakfast",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert3.jpg",
+    id: 19,
+    name: "Pandan Bread",
+    price: 20,
+    type: "breakfast",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert4.jpg",
+    id: 20,
+    name: "Pandan Bread",
+    price: 20,
+    type: "breakfast",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert1.jpg",
+    id: 21,
+    name: "Pandan Bread",
+    price: 20,
+    type: "dinner",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert2.jpg",
+    id: 22,
+    name: "Pandan Bread",
+    price: 20,
+    type: "dinner",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert3.jpg",
+    id: 23,
+    name: "Pandan Bread",
+    price: 20,
+    type: "dinner",
+  },
+  {
+    img: "https://astylers.com/mobile/aaem/images/dessert4.jpg",
+    id: 24,
+    name: "Pandan Bread",
+    price: 20,
+    type: "dinner",
+  },
 ];
 
 export default dataoffoods;
