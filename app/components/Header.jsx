@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className="w-full fixed top-0 z-10 h-fit text-white p-4 bg-[#ff4301] flex justify-between items-center">
       <Link href={"/"} className="flex items-center gap-2">
-        <h1 className="font-berkshire-swash text-3xl">Header</h1>
+        <h1 className="font-geist-sans text-3xl">Header</h1>
       </Link>
       <div className="relative">
         <button onClick={() => setOpen((o) => !o)} className="relative">

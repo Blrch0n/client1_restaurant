@@ -44,6 +44,22 @@ export function CartProvider({ children }) {
     });
   };
 
+  // ← NEW: bump quantity by 1 for the given id
+  const increaseQuantity = (id) => {
+    setItems((curr) =>
+      curr.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i))
+    );
+  }; // :contentReference[oaicite:0]{index=0}
+
+  // ← NEW: subtract 1, and if it hits 0 filter it out
+  const decreaseQuantity = (id) => {
+    setItems((curr) =>
+      curr
+        .map((i) => (i.id === id ? { ...i, quantity: i.quantity - 1 } : i))
+        .filter((i) => i.quantity > 0)
+    );
+  }; // :contentReference[oaicite:1]{index=1}
+
   const removeFromCart = (id) => {
     setItems((curr) => curr.filter((i) => i.id !== id));
   };
@@ -53,7 +69,15 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addToCart, removeFromCart, totalCount, totalPrice }}
+      value={{
+        items,
+        addToCart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
+        totalCount,
+        totalPrice,
+      }}
     >
       {children}
     </CartContext.Provider>

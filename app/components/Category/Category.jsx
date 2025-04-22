@@ -18,7 +18,7 @@ const Category = () => {
       </div>
       <div className="w-full h-fit flex overflow-x-auto whitespace-nowrap space-x-4">
         {categorydata.map((data, index) => (
-          <Link href={`/foods/${data.type}`} key={index}>
+          <Link href={`/category/${data.type}`} key={index}>
             <div className="flex-shrink-0 relative w-[144px] h-[70px] cursor-pointer rounded-[8px] overflow-hidden">
               <img
                 src={data.img}

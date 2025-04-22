@@ -2,6 +2,7 @@
 import { IoAddCircleOutline } from "react-icons/io5";
 import { useCart } from "../Cart/CartContext";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function FoodCard({ item }) {
   const { addToCart } = useCart();
@@ -21,11 +22,13 @@ export default function FoodCard({ item }) {
 
   return (
     <div className="flex flex-col bg-white rounded-[8px] overflow-hidden shadow">
-      <img
-        src={item.img}
-        alt={item.name}
-        className="w-full h-32 object-cover"
-      />
+      <Link href={`/food/${item.id}`}>
+        <img
+          src={item.img}
+          alt={item.name}
+          className="w-full h-32 object-cover"
+        />
+      </Link>
 
       <div className="p-2.5 flex flex-col gap-[3px]">
         <h1 className="font-semibold text-[14px] text-[#333]">{item.name}</h1>
