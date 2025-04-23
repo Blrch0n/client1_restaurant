@@ -6,14 +6,14 @@ const Category = () => {
   return (
     <div className="w-full h-fit p-5 pb-7 flex flex-col gap-3">
       <div className="w-full h-fit flex flex-row justify-between items-center">
-        <h1 className="font-berkshire-swash font-semibold text-[18px]">
-          Category
+        <h1 className="font-berkshire-swash text-[#333] font-semibold text-[18px]">
+          Ангилал
         </h1>
         <a
           href="/categoryAll"
-          className="text-[#ff4101] flex font-roboto flex-row items-center"
+          className="text-[#ff4101] text-[14px] flex font-roboto flex-row items-center"
         >
-          See All <MdOutlineKeyboardArrowRight />
+          Бүгдийг үзэх <MdOutlineKeyboardArrowRight />
         </a>
       </div>
       <div className="w-full h-fit flex overflow-x-auto whitespace-nowrap space-x-4">
@@ -30,7 +30,8 @@ const Category = () => {
               <div className="absolute inset-0 bg-black/50" />
 
               <h3 className="absolute inset-0 font-semibold text-[20px] flex justify-center items-center font-berkshire-swash text-white">
-                {data.type}
+                {data.type.charAt(0).toUpperCase() +
+                  data.type.slice(1).toLowerCase()}
               </h3>
             </div>
           </Link>

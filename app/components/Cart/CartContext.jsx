@@ -56,6 +56,10 @@ export function CartProvider({ children }) {
     );
   };
 
+  const removeAllFromCart = () => {
+    setItems([]);
+  };
+
   const removeFromCart = (id) => {
     setItems((curr) => curr.filter((i) => i.id !== id));
   };
@@ -72,6 +76,7 @@ export function CartProvider({ children }) {
         increaseQuantity,
         decreaseQuantity,
         totalCount,
+        removeAllFromCart,
         totalPrice,
       }}
     >

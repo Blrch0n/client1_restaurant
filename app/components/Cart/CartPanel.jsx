@@ -12,11 +12,12 @@ export default function CartPanel({ open, onClose }) {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    removeAllFromCart,
   } = useCart();
 
   return (
     <div
-      className={`fixed inset-0 z-50 transition-opacity duration-300 
+      className={`fixed inset-0 z-50 font-roboto text-[#333333] transition-opacity duration-300 
                   ${
                     open
                       ? "opacity-100 pointer-events-auto"
@@ -37,43 +38,59 @@ export default function CartPanel({ open, onClose }) {
           <FiX size={24} />
         </button>
 
-        <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
+        <h2 className=" font-semibold font-roboto text-[#ff4301] text-2xl mb-4">
+          Таны сагс
+        </h2>
 
         <div className="flex flex-col gap-4 px-[15px] border border-[#888] rounded-[5px] py-2.5">
           {items.length === 0 ? (
-            <p>Your cart is empty.</p>
+            <p className="text-[#888]">Таны сагс хоосон байна.</p>
           ) : (
             items.map((i) => (
               <div key={i.id} className="flex flex-col gap-5 items-start mb-3">
-                <div className="w-full flex items-start justify-between">
+                <div className="w-full flex gap-4 items-start justify-between">
                   <img
                     src={i.img}
                     alt={i.title}
                     className="w-20 h-12 rounded mr-2 object-cover"
                   />
                   <div className="flex-1">
-                    <p className="font-medium">{i.title}</p>
+                    <p className="font-medium text-[13px]">
+                      {i.mongolian_name}
+                    </p>
                   </div>
                   <button
                     className="text-red-500"
                     onClick={() => {
                       removeFromCart(i.id);
-                      toast.success(`${i.title} removed from cart`);
+                      toast.success(`${i.mongolian_name} сагснаас хаслаа.`);
                     }}
                   >
                     <FaTimes />
                   </button>
                 </div>
-                <div className="w-fit flex items-center justify-between">
-                  <span className="w-20 mr-2">Price</span> ${i.price}
+                <div className="w-fit flex text-[14px] text-[#ff4301] font-semibold items-center gap-4 justify-between">
+                  <span className="w-20 font-normal text-[#888] mr-2">
+                    Үнийн дүн
+                  </span>{" "}
+                  ${i.price}
                 </div>
-                <div className="w-fit flex items-center justify-between">
-                  <span className="w-20 mr-2">Quantity</span>
+                <div className="w-fit flex text-[14px] items-center font-semibold gap-4 justify-between">
+                  <span className="w-20 font-normal text-[#888] mr-2">
+                    Тоо ширхэг
+                  </span>
                   <div className="flex items-center w-fit gap-4">
                     <button
                       onClick={() => {
-                        decreaseQuantity(i.id);
-                        toast.success(`${i.title} quantity decreased`);
+                        if (i.quantity === 1) {
+                          removeFromCart(i.id);
+                          toast.success(`${i.mongolian_name} сагснаас хаслаа.`);
+                        } else {
+                          decreaseQuantity(i.id);
+                          toast.success(
+                            `${i.mongolian_name} нэг ширхэг хасагдлаа.`
+                          );
+                        }
                       }}
                       className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
                     >
@@ -83,7 +100,9 @@ export default function CartPanel({ open, onClose }) {
                     <button
                       onClick={() => {
                         increaseQuantity(i.id);
-                        toast.success(`${i.title} quantity increased`);
+                        toast.success(
+                          `${i.mongolian_name} нэг ширхэг нэмэгдлээ.`
+                        );
                       }}
                       className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
                     >
@@ -100,23 +119,27 @@ export default function CartPanel({ open, onClose }) {
           {items.length > 0 && (
             <div className="flex w-full flex-col items-start gap-2.5 pt-2">
               {items.map((i) => (
-                <div key={i.id} className="flex w-full justify-between mb-2">
-                  <span>{i.title}</span>
+                <div
+                  key={i.id}
+                  className="flex text-[#888] text-[13px] font-medium w-full justify-between mb-2"
+                >
+                  <span>{i.mongolian_name}</span>
                   <span>${i.price}</span>
                 </div>
               ))}
-              <div className="flex w-full font-bold justify-between mb-2">
-                <p>Total</p>
+              <div className="flex w-full text-[#333] font-semibold justify-between mb-2">
+                <p>Нийт төлөх дүн</p>
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
               <button
-                className="bg-[#ff4301] text-white p-2 rounded-full"
+                className="bg-[#ff4301] text-white py-[7px] text-[12px] px-[15px] rounded-full"
                 onClick={() => {
                   onClose();
-                  toast.success("Proceeding to checkout");
+                  toast.success("Амжилттай захиалсан.");
+                  removeAllFromCart();
                 }}
               >
-                Proceed to Checkout
+                Үргэжлүүлэх
               </button>
             </div>
           )}

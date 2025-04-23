@@ -13,11 +13,12 @@ export default function FoodCard({ item }) {
     addToCart({
       id: item.id,
       title: item.name,
+      mongolian_name: item.mongolian_name,
       price: item.price,
       img: item.img,
     });
 
-    toast.success(`${item.name} added to cart`);
+    toast.success(`${item.mongolian_name} нэмэгдлээ.`);
   };
 
   return (
@@ -30,11 +31,13 @@ export default function FoodCard({ item }) {
         />
       </Link>
 
-      <div className="p-2.5 flex flex-col gap-[3px]">
-        <h1 className="font-semibold text-[14px] text-[#333]">{item.name}</h1>
-        <div className="flex justify-between items-center">
+      <div className="p-2.5 flex flex-col w-full h-full justify-between gap-[3px]">
+        <h1 className="font-semibold text-[14px] text-[#333]">
+          {item.mongolian_name}
+        </h1>
+        <div className="flex w-full h-full justify-between items-end">
           <span className="font-semibold text-[14px] text-[#ff4301]">
-            ${item.price}
+            {new Intl.NumberFormat("en-US").format(item.price)}₮
           </span>
 
           <button

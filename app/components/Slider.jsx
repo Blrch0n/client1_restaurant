@@ -10,21 +10,21 @@ const sliderData = [
     title: "Welcome to Aaem",
     paragraph:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quos?",
-    button_label: "Read More",
+    button_label: "Дэлгэрэнгүй",
   },
   {
     img: "https://astylers.com/mobile/aaem/images/slider2.jpg",
     title: "Welcome to Aaem",
     paragraph:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quos?",
-    button_label: "Read More",
+    button_label: "Дэлгэрэнгүй",
   },
   {
     img: "https://astylers.com/mobile/aaem/images/slider3.jpg",
     title: "Welcome to Aaem",
     paragraph:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quos?",
-    button_label: "Read More",
+    button_label: "Дэлгэрэнгүй",
   },
 ];
 
@@ -108,12 +108,12 @@ export default function SimpleSlider() {
             {/* dark overlay */}
             <div className="absolute inset-0 bg-black/50" />
             {/* content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
-              <h1 className="text-lg font-berkshire-swash font-bold">
+            <div className="relative z-10 flex flex-col items-center justify-center gap-2 h-full text-white text-center px-6">
+              <h1 className=" font-berkshire-swash text-2xl font-bold">
                 {data.title}
               </h1>
-              <p className="text-sm font-roboto">{data.paragraph}</p>
-              <button className="mt-2 font-roboto rounded-full bg-[#ff4301] px-3 py-1 text-white">
+              <p className="text-[13px] font-roboto">{data.paragraph}</p>
+              <button className="mt-2 font-roboto rounded-full bg-[#ff4301] text-[12px] px-3 py-1 text-white">
                 {data.button_label}
               </button>
             </div>

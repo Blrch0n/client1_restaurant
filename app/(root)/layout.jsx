@@ -6,7 +6,18 @@ import Footer from "../components/Footer";
 export default function RootLayout({ children }) {
   return (
     <>
-      <Toaster position="bottom-center" />
+      <Toaster
+        position="top-left"
+        toastOptions={{
+          style: {
+            fontFamily: "Roboto,sans-serif",
+            fontSize: "13px",
+            background: "#333",
+            color: "#fff",
+            borderRadius: "8px",
+          },
+        }}
+      />
       <Header />
       {children}
       <Footer />
