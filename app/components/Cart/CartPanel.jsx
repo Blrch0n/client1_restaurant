@@ -6,7 +6,7 @@ import { FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import postRawRequest from "@/utils/PostRawRequest";
 
-export default function CartPanel({ open, onClose , tableid , merchantid }) {
+export default function CartPanel({ open, onClose, tableid, merchantid }) {
   const {
     items,
     totalPrice,
@@ -28,7 +28,7 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
       total: item.quantity,
     }));
     const response = await postRawRequest({
-      route: 'order',
+      route: "order",
       body: {
         products: productsToSend,
         totalPrice,
@@ -37,7 +37,7 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
         isPaid: false,
       },
     });
-    
+
     if (response?.data?.success) {
       toast.success("Захиалга амжилттай хийгдлээ.");
       removeAllFromCart();
@@ -45,7 +45,6 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
       toast.error("Захиалга хийхэд алдаа гарлаа.");
       console.log("Алдаа дэлгэрэнгүй:", response?.data || response);
     }
-    
   };
 
   return (
@@ -88,9 +87,7 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
                     className="w-20 h-12 rounded mr-2 object-cover"
                   />
                   <div className="flex-1">
-                    <p className="font-medium text-[13px]">
-                      {i.title}
-                    </p>
+                    <p className="font-medium text-[13px]">{i.title}</p>
                   </div>
                   <button
                     className="text-red-500"
@@ -105,8 +102,8 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
                 <div className="w-fit flex text-[14px] text-[#ff4301] font-semibold items-center gap-4 justify-between">
                   <span className="w-20 font-normal text-[#888] mr-2">
                     Үнийн дүн
-                  </span>{" "}
-                  ${i.price}
+                  </span>
+                  {`${i.price.toLocaleString()}₮`}
                 </div>
                 <div className="w-fit flex text-[14px] items-center font-semibold gap-4 justify-between">
                   <span className="w-20 font-normal text-[#888] mr-2">
@@ -120,9 +117,7 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
                           toast.success(`${i.title} сагснаас хаслаа.`);
                         } else {
                           decreaseQuantity(i.id);
-                          toast.success(
-                            `${i.title} нэг ширхэг хасагдлаа.`
-                          );
+                          toast.success(`${i.title} нэг ширхэг хасагдлаа.`);
                         }
                       }}
                       className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
@@ -133,9 +128,7 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
                     <button
                       onClick={() => {
                         increaseQuantity(i.id);
-                        toast.success(
-                          `${i.title} нэг ширхэг нэмэгдлээ.`
-                        );
+                        toast.success(`${i.title} нэг ширхэг нэмэгдлээ.`);
                       }}
                       className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
                     >
@@ -157,12 +150,12 @@ export default function CartPanel({ open, onClose , tableid , merchantid }) {
                   className="flex text-[#888] text-[13px] font-medium w-full justify-between mb-2"
                 >
                   <span>{i.title}</span>
-                  <span>${i.price}</span>
+                  <span>{i.price.toLocaleString()}₮</span>
                 </div>
               ))}
               <div className="flex w-full text-[#333] font-semibold justify-between mb-2">
                 <p>Нийт төлөх дүн</p>
-                <p>${totalPrice.toFixed(2)}</p>
+                <p>{totalPrice.toLocaleString()}₮</p>
               </div>
               <button
                 className="bg-[#ff4301] text-white py-[7px] text-[12px] px-[15px] rounded-full"

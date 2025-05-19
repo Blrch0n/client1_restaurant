@@ -4,12 +4,15 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "./Cart/CartContext";
 import CartPanel from "./Cart/CartPanel";
 import Link from "next/link";
-const Header = ({merchantid , tableid}) => {
+const Header = ({ merchantid, tableid }) => {
   const { totalCount } = useCart();
   const [open, setOpen] = useState(false);
   return (
     <div className="w-full fixed top-0 z-10 h-fit text-white p-4 bg-[#ff4301] flex justify-between items-center">
-      <Link href={"/"} className="flex items-center gap-2">
+      <Link
+        href={`/table/${tableid}/${merchantid}`}
+        className="flex items-center gap-2"
+      >
         <h1 className="font-geist-sans text-3xl">Header</h1>
       </Link>
       <div className="relative">
@@ -26,7 +29,12 @@ const Header = ({merchantid , tableid}) => {
         </button>
 
         {/* pass open to panel */}
-        <CartPanel open={open} onClose={() => setOpen(false)} tableid={tableid} merchantid={merchantid}/>
+        <CartPanel
+          open={open}
+          onClose={() => setOpen(false)}
+          tableid={tableid}
+          merchantid={merchantid}
+        />
       </div>
     </div>
   );

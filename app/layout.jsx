@@ -4,7 +4,6 @@ import { Berkshire_Swash, Roboto } from "next/font/google";
 import { CartProvider } from "./components/Cart/CartContext";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -34,7 +33,7 @@ export default function RootLayout({ children }) {
           <Toaster />
           {children}
           {/* <Footer /> */}
-          </CartProvider>
+        </CartProvider>
       </body>
     </html>
   );

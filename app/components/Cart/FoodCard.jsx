@@ -21,7 +21,7 @@ export default function FoodCard({ item, merchantid, tableid }) {
   };
 
   return (
-    <div className="flex flex-col font-roboto bg-white rounded-[8px] overflow-hidden shadow">
+    <div className="flex flex-col h-fit font-roboto bg-white rounded-[8px] overflow-hidden shadow">
       <Link href={`/table/${tableid}/${merchantid}/food/${item._id}`}>
         <img
           src={item.cover && apiData.file_api_url + item.cover}
@@ -31,9 +31,7 @@ export default function FoodCard({ item, merchantid, tableid }) {
       </Link>
 
       <div className="p-2.5 flex flex-col w-full h-full justify-between gap-[3px]">
-        <h1 className="font-semibold text-[14px] text-[#333]">
-          {item.title}
-        </h1>
+        <h1 className="font-semibold text-[14px] text-[#333]">{item.title}</h1>
         <div className="flex w-full h-full justify-between items-end">
           <span className="font-semibold text-[14px] text-[#ff4301]">
             {new Intl.NumberFormat("en-US").format(item.price)}₮
