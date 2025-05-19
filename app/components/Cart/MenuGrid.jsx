@@ -15,7 +15,6 @@ const menuItems = [
     title: "Sunny Breakfast",
     price: 15,
   },
-  // …add more
 ];
 
 export default function MenuGrid() {

@@ -3,11 +3,13 @@ import categorydata from "@/app/data/category-data";
 import apiData from "@/utils/apiData";
 import getRequest from "@/utils/getRequest";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-const Page = ({merchantid}) => {
+const Page = () => {
   const [datas , setDatas] =useState([])
+  const {merchantid , tableid} = useParams()
   const [isLoading , setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const Page = ({merchantid}) => {
   return (
     <section className="w-full flex text-black flex-col px-5 pt-[80px] h-fit bg-white">
       <div className="w-full h-fit flex flex-row justify-between items-center">
-        <Link href={"/"} className="flex items-center gap-2">
+        <Link href={`/table/${tableid}/${merchantid}`} className="flex items-center gap-2">
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-berkshire-swash text-[#333]">
@@ -29,7 +31,7 @@ const Page = ({merchantid}) => {
       </div>
       <div className="w-full h-fit grid grid-cols-2 gap-4 py-5 pb-7">
         {datas.map((data, index) => (
-          <Link href={`/category/${data._id}`} key={index}>
+          <Link href={`/table/${tableid}/${merchantid}/subcategory/${data._id}`} key={index}>
             <div className="flex-shrink-0 relative w-full h-[105px] cursor-pointer rounded-[8px] overflow-hidden">
               <img
                 src={data.file && apiData.file_api_url + data.file}

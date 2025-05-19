@@ -4,8 +4,9 @@ import { FiX } from "react-icons/fi";
 import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
+import postRawRequest from "@/utils/PostRawRequest";
 
-export default function CartPanel({ open, onClose }) {
+export default function CartPanel({ open, onClose , tableid , merchantid }) {
   const {
     items,
     totalPrice,
@@ -14,6 +15,38 @@ export default function CartPanel({ open, onClose }) {
     decreaseQuantity,
     removeAllFromCart,
   } = useCart();
+
+  const handleCheckout = async () => {
+    if (!items || items.length === 0) {
+      toast.error("Сагс хоосон байна.");
+      return;
+    }
+
+    const productsToSend = items.map((item) => ({
+      product: item.id || item._id,
+      price: item.price,
+      total: item.quantity,
+    }));
+    const response = await postRawRequest({
+      route: 'order',
+      body: {
+        products: productsToSend,
+        totalPrice,
+        merchantId: merchantid,
+        tableId: tableid,
+        isPaid: false,
+      },
+    });
+    
+    if (response?.data?.success) {
+      toast.success("Захиалга амжилттай хийгдлээ.");
+      removeAllFromCart();
+    } else {
+      toast.error("Захиалга хийхэд алдаа гарлаа.");
+      console.log("Алдаа дэлгэрэнгүй:", response?.data || response);
+    }
+    
+  };
 
   return (
     <div
@@ -56,14 +89,14 @@ export default function CartPanel({ open, onClose }) {
                   />
                   <div className="flex-1">
                     <p className="font-medium text-[13px]">
-                      {i.mongolian_name}
+                      {i.title}
                     </p>
                   </div>
                   <button
                     className="text-red-500"
                     onClick={() => {
                       removeFromCart(i.id);
-                      toast.success(`${i.mongolian_name} сагснаас хаслаа.`);
+                      toast.success(`${i.title} сагснаас хаслаа.`);
                     }}
                   >
                     <FaTimes />
@@ -84,11 +117,11 @@ export default function CartPanel({ open, onClose }) {
                       onClick={() => {
                         if (i.quantity === 1) {
                           removeFromCart(i.id);
-                          toast.success(`${i.mongolian_name} сагснаас хаслаа.`);
+                          toast.success(`${i.title} сагснаас хаслаа.`);
                         } else {
                           decreaseQuantity(i.id);
                           toast.success(
-                            `${i.mongolian_name} нэг ширхэг хасагдлаа.`
+                            `${i.title} нэг ширхэг хасагдлаа.`
                           );
                         }
                       }}
@@ -101,7 +134,7 @@ export default function CartPanel({ open, onClose }) {
                       onClick={() => {
                         increaseQuantity(i.id);
                         toast.success(
-                          `${i.mongolian_name} нэг ширхэг нэмэгдлээ.`
+                          `${i.title} нэг ширхэг нэмэгдлээ.`
                         );
                       }}
                       className="w-6 h-6 flex items-center justify-center rounded-full bg-[#ff4301] text-white"
@@ -123,7 +156,7 @@ export default function CartPanel({ open, onClose }) {
                   key={i.id}
                   className="flex text-[#888] text-[13px] font-medium w-full justify-between mb-2"
                 >
-                  <span>{i.mongolian_name}</span>
+                  <span>{i.title}</span>
                   <span>${i.price}</span>
                 </div>
               ))}
@@ -133,11 +166,7 @@ export default function CartPanel({ open, onClose }) {
               </div>
               <button
                 className="bg-[#ff4301] text-white py-[7px] text-[12px] px-[15px] rounded-full"
-                onClick={() => {
-                  onClose();
-                  toast.success("Амжилттай захиалсан.");
-                  removeAllFromCart();
-                }}
+                onClick={handleCheckout}
               >
                 Үргэжлүүлэх
               </button>

@@ -2,62 +2,71 @@
 import { useCart } from "@/app/components/Cart/CartContext";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
-import dataoffoods from "@/app/data/menu-data";
 import Link from "next/link";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useEffect, useState } from "react";
+import getRequest from "@/utils/getRequest";
+import apiData from "@/utils/apiData";
 
 const Page = () => {
-  const { food } = useParams();
-  const id = Number(food);
-  const firstMatch = dataoffoods.find((d) => d.id === id);
+  const { food } = useParams(); 
+  const [datas, setDatas] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
 
-  const handleAdd = (e) => {
-    e.stopPropagation();
+  useEffect(() => {
+    if (food) {
+      getRequest({
+        route: `product/${food}`,
+        setValue: setDatas,
+        setIsLoading,
+      });
+    }
+  }, [food]);
 
+  const handleAdd = () => {
+    if (!datas) return;
     addToCart({
-      id: firstMatch.id,
-      title: firstMatch.name,
-      mongolian_name: firstMatch.mongolian_name,
-      price: firstMatch.price,
-      img: firstMatch.img,
+      id: datas._id,
+      title: datas.title,
+      price: datas.price,
+      img: apiData.file_api_url + datas.cover,
     });
-
-    toast.success(`${firstMatch.mongolian_name} нэмэгдлээ.`);
+    toast.success(`${datas.title} нэмэгдлээ.`);
   };
+
+  if (isLoading || !datas) return <p>Уншиж байна...</p>;
+
   return (
     <section className="w-full flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] h-fit bg-white">
       <div className="w-full h-fit flex flex-col">
         <Link
-          href={`/category/${firstMatch.type}`}
+          href={`/category/${datas.subcategory}`}
           className="flex items-center mb-4 gap-2"
         >
-          <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
+          <IoMdArrowRoundBack className="text-[20px] text-[#ff4101]" />
           <h1 className="text-[16px] text-[#333]">Буцах</h1>
         </Link>
         <img
-          src={firstMatch.img}
-          alt="img"
-          className="w-full rounded-[8px] h-auto"
+          src={apiData.file_api_url + datas.cover}
+          alt={datas.name}
+          className="w-full rounded-[8px] h-auto md:w-[20vw]"
         />
         <div className="w-full h-fit flex gap-2 flex-col">
           <span className="bg-[#ff4301] text-[13px] text-white px-2.5 rounded w-fit mt-4">
             <p>
-              {firstMatch.type.charAt(0).toUpperCase() +
-                firstMatch.type.slice(1).toLowerCase()}
+              {datas.subcategory.charAt(0).toUpperCase() +
+                datas.subcategory.slice(1).toLowerCase()}
             </p>
           </span>
           <h1 className="text-[16px] text-[#333] font-bold">
-            {firstMatch.mongolian_name}
+             {datas.title}
           </h1>
           <p className="text-lg text-[#ff4301] font-semibold">
-            {new Intl.NumberFormat("en-US").format(firstMatch.price)}₮
+            {new Intl.NumberFormat("en-US").format(datas.price)}₮
           </p>
-
           <p className="text-base text-[#888] text-[13px]">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi
-            ducimus, dolor aperiam impedit, sapiente natus magni eaque, optio
-            quae aliquid saepe.
+            {datas.description || "Тайлбар алга байна."}
           </p>
           <button
             onClick={handleAdd}
@@ -70,5 +79,6 @@ const Page = () => {
     </section>
   );
 };
+
 
 export default Page;

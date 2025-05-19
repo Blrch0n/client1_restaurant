@@ -3,37 +3,36 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { useCart } from "../Cart/CartContext";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import apiData from "@/utils/apiData";
 
-export default function FoodCard({ item }) {
+export default function FoodCard({ item, merchantid, tableid }) {
   const { addToCart } = useCart();
 
   const handleAdd = (e) => {
     e.stopPropagation();
     e.preventDefault();
     addToCart({
-      id: item.id,
-      title: item.name,
-      mongolian_name: item.mongolian_name,
+      id: item._id,
+      title: item.title,
       price: item.price,
-      img: item.img,
+      img: apiData.file_api_url + item.cover,
     });
-
-    toast.success(`${item.mongolian_name} нэмэгдлээ.`);
+    toast.success("Бүтээгдэхүүн сагсанд нэмэгдлээ!");
   };
 
   return (
     <div className="flex flex-col font-roboto bg-white rounded-[8px] overflow-hidden shadow">
-      <Link href={`/food/${item.id}`}>
+      <Link href={`/table/${tableid}/${merchantid}/food/${item._id}`}>
         <img
-          src={item.img}
-          alt={item.name}
+          src={item.cover && apiData.file_api_url + item.cover}
+          alt={item.title}
           className="w-full h-32 object-cover"
         />
       </Link>
 
       <div className="p-2.5 flex flex-col w-full h-full justify-between gap-[3px]">
         <h1 className="font-semibold text-[14px] text-[#333]">
-          {item.mongolian_name}
+          {item.title}
         </h1>
         <div className="flex w-full h-full justify-between items-end">
           <span className="font-semibold text-[14px] text-[#ff4301]">

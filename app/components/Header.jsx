@@ -4,7 +4,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "./Cart/CartContext";
 import CartPanel from "./Cart/CartPanel";
 import Link from "next/link";
-const Header = () => {
+const Header = ({merchantid , tableid}) => {
   const { totalCount } = useCart();
   const [open, setOpen] = useState(false);
   return (
@@ -26,7 +26,7 @@ const Header = () => {
         </button>
 
         {/* pass open to panel */}
-        <CartPanel open={open} onClose={() => setOpen(false)} />
+        <CartPanel open={open} onClose={() => setOpen(false)} tableid={tableid} merchantid={merchantid}/>
       </div>
     </div>
   );
