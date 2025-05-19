@@ -5,6 +5,8 @@ import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import postRawRequest from "@/utils/PostRawRequest";
+import axios from "axios";
+import apiData from "@/utils/apiData";
 
 export default function CartPanel({ open, onClose, tableid, merchantid }) {
   const {
