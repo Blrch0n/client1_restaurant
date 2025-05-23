@@ -1,5 +1,5 @@
-// components/CartPanel.jsx
-import React, { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
@@ -9,6 +9,17 @@ import Image from "next/image";
 
 export default function CartPanel({ open, onClose, tableid, merchantid }) {
   const [imageError, setImageError] = useState(false);
+  const [isHistoryClicked, setIsHistoryClicked] = useState(false);
+  const [orderHistory, setOrderHistory] = useState([]);
+
+  useEffect(() => {
+    // Get order history from localStorage on client-side
+    const savedHistory = localStorage.getItem("orderHistory");
+    if (savedHistory) {
+      setOrderHistory(JSON.parse(savedHistory));
+      console.log("savedHistory", JSON.parse(savedHistory));
+    }
+  }, []);
 
   const {
     items,
@@ -29,21 +40,45 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
       product: item.id || item._id,
       price: item.price,
       total: item.quantity,
+      title: item.title, // Add title for history display
     }));
+
+    // Create order data object
+    const orderData = {
+      products: productsToSend,
+      totalPrice,
+      merchantId: merchantid,
+      tableId: tableid,
+      isPaid: false,
+      orderDate: new Date().toISOString(),
+    };
+
     const response = await postRawRequest({
       route: "order",
-      body: {
-        products: productsToSend,
-        totalPrice,
-        merchantId: merchantid,
-        tableId: tableid,
-        isPaid: false,
-      },
+      body: orderData,
     });
 
     if (response?.data?.success) {
-      toast.success("Захиалга амжилттай хийгдлээ.");
-      removeAllFromCart();
+      try {
+        const existingOrders = JSON.parse(
+          localStorage.getItem("orderHistory") || "[]"
+        );
+        const orderToStore = {
+          ...orderData,
+          orderId: response.data.orderId || Date.now(),
+          status: "success",
+        };
+
+        const updatedOrders = [...existingOrders, orderToStore];
+        localStorage.setItem("orderHistory", JSON.stringify(updatedOrders));
+        setOrderHistory(updatedOrders);
+
+        toast.success("Захиалга амжилттай хийгдлээ.");
+        removeAllFromCart();
+      } catch (error) {
+        console.error("Error storing order history:", error);
+        toast.error("Захиалгын түүх хадгалахад алдаа гарлаа.");
+      }
     } else {
       toast.error("Захиалга хийхэд алдаа гарлаа.");
       console.log("Алдаа дэлгэрэнгүй:", response?.data || response);
@@ -76,6 +111,52 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
         <h2 className=" font-semibold font-roboto text-[#ff4301] text-2xl mb-4">
           Таны сагс
         </h2>
+
+        <p
+          onClick={() => {
+            setIsHistoryClicked(true);
+          }}
+        >
+          Түүх харах
+        </p>
+
+        {isHistoryClicked && (
+          <div className="flex flex-col gap-4 px-[15px] border border-[#888] rounded-[5px] py-2.5">
+            {orderHistory.length === 0 ? (
+              <p className="text-[#888]">Захиалгын түүх байхгүй байна.</p>
+            ) : (
+              orderHistory.map((order, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col gap-5 items-start mb-3"
+                >
+                  <div className="w-full flex gap-4 items-start justify-between">
+                    <div className="flex-1">
+                      <p className="font-medium text-[13px]">{`Захиалга ${
+                        index + 1
+                      }`}</p>
+                    </div>
+                  </div>
+                  <div className="w-fit flex text-[14px] text-[#ff4301] font-semibold items-center gap-4 justify-between">
+                    <span className="w-20 font-normal text-[#888] mr-2">
+                      Захиалгын дүн
+                    </span>
+                    {`${order.totalPrice.toLocaleString()}₮`}
+                  </div>
+                </div>
+              ))
+            )}
+            <button
+              className="bg-[#ff4301] text-white py-[7px] text-[12px] px-[15px] rounded-full"
+              onClick={() => {
+                setIsHistoryClicked(false);
+                removeAllFromCart();
+              }}
+            >
+              Сагс руу буцах
+            </button>
+          </div>
+        )}
 
         <div className="flex flex-col gap-4 px-[15px] border border-[#888] rounded-[5px] py-2.5">
           {items.length === 0 ? (
