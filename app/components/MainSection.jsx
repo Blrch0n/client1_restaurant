@@ -6,7 +6,7 @@ import Menu from "./Menu/Menu";
 const MainSection = ({ tableid, merchantid }) => {
   return (
     <section className="pt-16 bg-white text-black">
-      {/* <PopularFoods merchantid={merchantid} /> */}
+      <PopularFoods merchantid={merchantid} tableid={tableid} />
       <Category merchantid={merchantid} tableid={tableid} />
       <Menu merchantid={merchantid} tableid={tableid} />
     </section>

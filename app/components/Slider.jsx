@@ -6,16 +6,20 @@ import "slick-carousel/slick/slick-theme.css";
 import getRequest from "@/utils/getRequest";
 import apiData from "@/utils/apiData";
 
-export default function SimpleSlider({merchantid}) {
+export default function SimpleSlider({ merchantid, tableid }) {
   const sliderRef = useRef(null);
-  const [ datas , setDatas ] = useState([])
-  const [isLoading , setIsLoading] = useState(true)
+  const [datas, setDatas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if(isLoading){
-      getRequest({route: `slider?user=${merchantid}` , setValue: setDatas , setIsLoading})
+    if (isLoading) {
+      getRequest({
+        route: `slider?user=${merchantid}`,
+        setValue: setDatas,
+        setIsLoading,
+      });
     }
-  },[isLoading])
+  }, [isLoading]);
 
   const settings = {
     dots: true,
@@ -24,7 +28,7 @@ export default function SimpleSlider({merchantid}) {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000, 
+    autoplaySpeed: 3000,
     pauseOnHover: true,
 
     appendDots: (dots) => (
@@ -61,12 +65,14 @@ export default function SimpleSlider({merchantid}) {
             onClick={() => sliderRef.current?.slickNext()}
             className="relative w-full h-[230px] sm:h-[300px] lg:h-[500px] cursor-pointer rounded-[8px] overflow-hidden"
           >
-             <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${data.image && apiData.file_api_url + data.image})`,
-                }}
-              />
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${
+                  data.image && apiData.file_api_url + data.image
+                })`,
+              }}
+            />
 
             <div className="absolute inset-0 bg-black/50" />
             <div className="relative z-10 flex flex-col items-center justify-center gap-2 h-full text-white text-center px-6">
