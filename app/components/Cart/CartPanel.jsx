@@ -1,14 +1,15 @@
 // components/CartPanel.jsx
-import React from "react";
+import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import postRawRequest from "@/utils/PostRawRequest";
-import axios from "axios";
-import apiData from "@/utils/apiData";
+import Image from "next/image";
 
 export default function CartPanel({ open, onClose, tableid, merchantid }) {
+  const [imageError, setImageError] = useState(false);
+
   const {
     items,
     totalPrice,
@@ -83,10 +84,19 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
             items.map((i) => (
               <div key={i.id} className="flex flex-col gap-5 items-start mb-3">
                 <div className="w-full flex gap-4 items-start justify-between">
-                  <img
+                  {/* <img
                     src={i.img}
                     alt={i.title}
                     className="w-20 h-12 rounded mr-2 object-cover"
+                  /> */}
+                  <Image
+                    src={imageError || i.img ? "/foodimage.jpg" : i.img}
+                    alt={i.title}
+                    width={80}
+                    height={48}
+                    className="object-cover"
+                    priority
+                    onError={() => setImageError(true)}
                   />
                   <div className="flex-1">
                     <p className="font-medium text-[13px]">{i.title}</p>

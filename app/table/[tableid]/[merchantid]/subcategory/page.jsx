@@ -33,17 +33,17 @@ const Page = () => {
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-berkshire-swash text-[#333]">
-          Category:
-          <span className="text-[#ff4101] font-semibold">All</span>
+          Ангилал:
+          <span className="text-[#ff4101] font-semibold">Бүгд</span>
         </h1>
       </div>
-      <div className="w-full min-h-screen h-fit grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-5 gap-4 py-5 pb-7">
+      <div className="w-full min-h-screen h-fit grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 px-5 gap-4 py-5 pb-7">
         {datas.map((data, index) => (
           <Link
             href={`/table/${tableid}/${merchantid}/subcategory/${data._id}`}
             key={index}
           >
-            <div className="flex-shrink-0 relative w-full h-[105px] cursor-pointer rounded-[8px] overflow-hidden">
+            <div className="flex-shrink-0 relative w-full h-[150px] cursor-pointer rounded-[8px] overflow-hidden">
               <img
                 src={data.file && apiData.file_api_url + data.file}
                 alt="Category"

@@ -4,8 +4,11 @@ import { useCart } from "../Cart/CartContext";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import apiData from "@/utils/apiData";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function FoodCard({ item, merchantid, tableid }) {
+  const [imageError, setImageError] = useState(false);
   const { addToCart } = useCart();
 
   const handleAdd = (e) => {
@@ -23,11 +26,20 @@ export default function FoodCard({ item, merchantid, tableid }) {
   return (
     <div className="flex flex-col h-fit font-roboto bg-white rounded-[8px] overflow-hidden shadow">
       <Link href={`/table/${tableid}/${merchantid}/food/${item._id}`}>
-        <img
-          src={item.cover && apiData.file_api_url + item.cover}
-          alt={item.title}
-          className="w-full h-32 object-cover"
-        />
+        <div className="relative w-full h-[200px]">
+          <Image
+            src={
+              imageError || !item.cover
+                ? "/foodimage.jpg"
+                : apiData.file_api_url + item.cover
+            }
+            alt={item.title}
+            fill
+            className="object-cover"
+            priority
+            onError={() => setImageError(true)}
+          />
+        </div>
       </Link>
 
       <div className="p-2.5 flex flex-col w-full h-full justify-between gap-[3px]">

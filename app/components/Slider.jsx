@@ -6,6 +6,27 @@ import "slick-carousel/slick/slick-theme.css";
 import getRequest from "@/utils/getRequest";
 import apiData from "@/utils/apiData";
 
+const mockSliderData = [
+  {
+    title: "Special Offer",
+    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
+    image: "/foodimage.jpg",
+    button_label: "Яг одоо захиал",
+  },
+  {
+    title: "New Collection",
+    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
+    image: "/foodimage.jpg",
+    button_label: "Яг одоо захиал",
+  },
+  {
+    title: "Limited Edition",
+    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
+    image: "/foodimage.jpg",
+    button_label: "Яг одоо захиал",
+  },
+];
+
 export default function SimpleSlider({ merchantid, tableid }) {
   const sliderRef = useRef(null);
   const [datas, setDatas] = useState([]);
@@ -13,12 +34,17 @@ export default function SimpleSlider({ merchantid, tableid }) {
 
   useEffect(() => {
     if (isLoading) {
-      getRequest({
-        route: `slider?user=${merchantid}`,
-        setValue: setDatas,
-        setIsLoading,
-      });
+      // For development/testing
+      setDatas(mockSliderData);
+      setIsLoading(false);
     }
+    // if (isLoading) {
+    //   getRequest({
+    //     route: `slider?user=${merchantid}`,
+    //     setValue: setDatas,
+    //     setIsLoading,
+    //   });
+    // }
   }, [isLoading]);
 
   const settings = {
@@ -68,9 +94,10 @@ export default function SimpleSlider({ merchantid, tableid }) {
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: `url(${
-                  data.image && apiData.file_api_url + data.image
-                })`,
+                // backgroundImage: `url(${
+                //   data.image && apiData.file_api_url + data.image
+                // })`,
+                backgroundImage: `${`url(${data.image})`}`,
               }}
             />
 

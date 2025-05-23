@@ -35,6 +35,8 @@ const page = () => {
   const subcategoryTitle =
     subdatas.find((e) => e._id === subcategory)?.title || "Тодорхойгүй";
 
+  const filteredFoods = datas.filter((d) => d.subcategory === subcategory);
+
   return (
     <section className="w-full flex text-black flex-col pt-[80px] h-fit bg-white">
       <div className="w-full h-fit flex flex-row justify-between px-5 items-center">
@@ -45,7 +47,7 @@ const page = () => {
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-roboto text-[#333]">
-          Ангилал:{" "}
+          Ангилал:
           <span className="text-[#ff4101] font-semibold">
             {subcategoryTitle}
           </span>
@@ -53,7 +55,23 @@ const page = () => {
       </div>
 
       <div className="w-full min-h-screen h-fit grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:grid-cols-4  gap-4 px-5 py-5 pb-7">
-        {datas
+        {filteredFoods.length === 0 ? (
+          <div className="col-span-full text-center py-8 text-gray-500">
+            Энэ ангилалд хоол байхгүй байна.
+          </div>
+        ) : (
+          filteredFoods.map((d) => (
+            <FoodCard
+              key={d._id}
+              item={d}
+              merchantid={merchantid}
+              tableid={tableid}
+            />
+          ))
+        )}
+        {/* Uncomment this if you want to show all items */}
+
+        {/* {datas
           .filter((d) => d.subcategory === subcategory)
           .map((d) => (
             <FoodCard
@@ -62,7 +80,7 @@ const page = () => {
               merchantid={merchantid}
               tableid={tableid}
             />
-          ))}
+          ))} */}
       </div>
       <Footer />
     </section>
