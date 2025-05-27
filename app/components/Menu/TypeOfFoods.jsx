@@ -20,7 +20,6 @@ const TypeOfFoods = ({ foodType, merchantid, tableid }) => {
   if (isLoading) return <p>Ачааллаж байна...</p>;
 
   const filteredFoods = datas.filter((d) => d.subcategory === foodType);
-
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {filteredFoods.length === 0 ? (

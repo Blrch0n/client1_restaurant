@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import getRequest from "@/utils/getRequest";
 
 const MenuTypes = ({ foodType, setFoodType, merchantid }) => {
@@ -20,7 +20,7 @@ const MenuTypes = ({ foodType, setFoodType, merchantid }) => {
   return (
     <div className="w-full h-fit flex flex-row overflow-x-auto scrollbar-hide gap-0">
       {datas
-        .filter((data) => data?.title)
+        // .filter((data) => data?.title)
         .map((data, index) => (
           <button
             key={index}

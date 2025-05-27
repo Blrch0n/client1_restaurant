@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import getRequest from "@/utils/getRequest";
 import apiData from "@/utils/apiData";
+import axios from "axios";
 
 const mockSliderData = [
   {
@@ -35,17 +35,28 @@ export default function SimpleSlider({ merchantid, tableid }) {
   useEffect(() => {
     if (isLoading) {
       // For development/testing
-      setDatas(mockSliderData);
-      setIsLoading(false);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `${apiData.api_url}slider/merchant/${merchantid}`
+          );
+          setDatas(response.data.data);
+        } catch (error) {
+          console.error("Error fetching slider data:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchData();
     }
-    // if (isLoading) {
-    //   getRequest({
-    //     route: `slider?user=${merchantid}`,
-    //     setValue: setDatas,
-    //     setIsLoading,
-    //   });
-    // }
   }, [isLoading]);
+
+  // console.log("Slider Data:", datas.imageUrl);
+
+  useEffect(() => {
+    console.log(datas);
+  }, [datas]);
 
   const settings = {
     dots: true,
@@ -85,34 +96,36 @@ export default function SimpleSlider({ merchantid, tableid }) {
         {...settings}
         className="w-full h-[230px] sm:h-[300px] lg:h-[500px] bg-white text-black"
       >
-        {datas.map((data, index) => (
-          <div
-            key={index}
-            onClick={() => sliderRef.current?.slickNext()}
-            className="relative w-full h-[230px] sm:h-[300px] lg:h-[500px] cursor-pointer rounded-[8px] overflow-hidden"
-          >
+        {datas.map((data, index) => {
+          console.log(data);
+          return (
             <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                // backgroundImage: `url(${
-                //   data.image && apiData.file_api_url + data.image
-                // })`,
-                backgroundImage: `${`url(${data.image})`}`,
-              }}
-            />
+              key={index}
+              onClick={() => sliderRef.current?.slickNext()}
+              className="relative w-full h-[230px] sm:h-[300px] lg:h-[500px] cursor-pointer rounded-[8px] overflow-hidden"
+            >
+              <img
+                className="absolute inset-0 bg-cover bg-center"
+                src={data.image && apiData.file_api_url + data.image}
+              />
+              {/* <img
+                src={data.image && apiData.file_api_url + data.image}
+                alt=""
+              /> */}
 
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="relative z-10 flex flex-col items-center justify-center gap-2 h-full text-white text-center px-6">
-              <h1 className=" font-berkshire-swash text-2xl font-bold">
-                {data.title}
-              </h1>
-              <p className="text-[13px] font-roboto">{data.description}</p>
-              <button className="mt-2 font-roboto rounded-full bg-[#ff4301] text-[12px] px-3 py-1 text-white">
-                {/* {data.button_label} */} Яг одоо захиал
-              </button>
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="relative z-10 flex flex-col items-center justify-center gap-2 h-full text-white text-center px-6">
+                <h1 className=" font-berkshire-swash text-2xl font-bold">
+                  {data.title}
+                </h1>
+                <p className="text-[13px] font-roboto">{data.description}</p>
+                <button className="mt-2 font-roboto rounded-full bg-[#ff4301] text-[12px] px-3 py-1 text-white">
+                  {/* {data.button_label} */} Яг одоо захиал
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </Slider>
     </div>
   );
