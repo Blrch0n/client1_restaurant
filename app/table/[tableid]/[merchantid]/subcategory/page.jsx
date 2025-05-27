@@ -37,7 +37,7 @@ const Page = () => {
           <span className="text-[#ff4101] font-semibold">Бүгд</span>
         </h1>
       </div>
-      <div className="w-full min-h-screen h-fit grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 px-5 gap-4 py-5 pb-7">
+      <div className="w-full h-fit grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 px-5 gap-4 py-5 pb-7">
         {datas.map((data, index) => (
           <Link
             href={`/table/${tableid}/${merchantid}/subcategory/${data._id}`}
