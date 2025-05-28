@@ -5,10 +5,8 @@ import { useCart } from "../Cart/CartContext";
 import { FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import postRawRequest from "@/utils/PostRawRequest";
-import Image from "next/image";
 
 export default function CartPanel({ open, onClose, tableid, merchantid }) {
-  const [imageError, setImageError] = useState(false);
   const [isHistoryClicked, setIsHistoryClicked] = useState(false);
   const [orderHistory, setOrderHistory] = useState([]);
   const [isOrderClicked, setIsOrderClicked] = useState(null);
@@ -48,7 +46,6 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
     const orderData = {
       products: productsToSend,
       totalPrice,
-      branch: "hello",
       merchantId: merchantid,
       tableId: tableid,
       isPaid: false,
@@ -79,7 +76,6 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
         const orderToStore = {
           products: productsWithTitles,
           totalPrice,
-          branch: "hello",
           merchantId: merchantid,
           tableId: tableid,
           isPaid: false,
