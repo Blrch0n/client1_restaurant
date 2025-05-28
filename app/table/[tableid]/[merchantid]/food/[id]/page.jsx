@@ -27,7 +27,18 @@ const page = () => {
 
   console.log("laoding", id);
 
-  if (isLoading) return <p>Уншиж байна...</p>;
+  if (isLoading)
+    return (
+      <section className="w-full h-screen items-center justify-center flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] bg-white">
+        <svg
+          className="mr-3 size-10 animate-spin"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </section>
+    );
   if (!item) return <p>Бүтээгдэхүүн олдсонгүй.</p>;
 
   const handleAdd = () => {

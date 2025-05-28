@@ -17,7 +17,18 @@ const TypeOfFoods = ({ foodType, merchantid, tableid }) => {
     }
   }, [isLoading]);
 
-  if (isLoading) return <p>Ачааллаж байна...</p>;
+  if (isLoading)
+    return (
+      <div className="w-full h-[400px] flex items-center justify-center">
+        <svg
+          className="mr-3 size-10 animate-spin"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </div>
+    );
 
   const filteredFoods = datas.filter((d) => d.subcategory === foodType);
   return (
