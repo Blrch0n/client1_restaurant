@@ -1,5 +1,6 @@
 "use client";
 import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
 import categorydata from "@/app/data/category-data";
 import apiData from "@/utils/apiData";
 import getRequest from "@/utils/getRequest";
@@ -26,6 +27,7 @@ const Page = () => {
   if (isLoading)
     return (
       <section className="w-full flex text-black flex-col pt-[80px] h-fit bg-white">
+        <Header tableid={tableid} merchantid={merchantid} />
         <div className="w-full flex flex-row px-5 h-screen justify-center items-center">
           <svg
             className="mr-3 size-10 animate-spin"
@@ -42,6 +44,7 @@ const Page = () => {
 
   return (
     <section className="w-full flex text-black flex-col pt-[80px] h-fit bg-white">
+      <Header tableid={tableid} merchantid={merchantid} />
       <div className="w-full h-fit flex flex-row px-5 justify-between items-center">
         <Link
           href={`/table/${tableid}/${merchantid}`}

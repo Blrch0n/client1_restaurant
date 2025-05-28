@@ -47,6 +47,7 @@ export default function CartPanel({ open, onClose, tableid, merchantid }) {
       products: productsToSend,
       totalPrice,
       merchantId: merchantid,
+      createUser: merchantid, // Assuming the merchant is the creator
       tableId: tableid,
       isPaid: false,
       // orderDate: new Date().toISOString(),

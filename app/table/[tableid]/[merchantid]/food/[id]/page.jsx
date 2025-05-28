@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import getRequest from "@/utils/getRequest";
 import apiData from "@/utils/apiData";
 import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
 
 const page = () => {
   const { tableid, merchantid, id } = useParams();
@@ -53,6 +54,7 @@ const page = () => {
 
   return (
     <>
+      <Header tableid={tableid} merchantid={merchantid} />
       <section className="w-full h-fit min-h-screen flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] bg-white">
         <Link
           href={`/table/${tableid}/${merchantid}`}

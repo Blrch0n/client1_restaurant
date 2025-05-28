@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${roboto.variable} ${berkshire.variable}`}>
         <CartProvider>
-          <Header />
+          {/* <Header /> */}
           <Toaster />
           {children}
           {/* <Footer /> */}

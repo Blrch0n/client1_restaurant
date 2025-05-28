@@ -1,6 +1,7 @@
 "use client";
 import FoodCard from "@/app/components/Cart/FoodCard";
 import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
 import getRequest from "@/utils/getRequest";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -48,6 +49,7 @@ const page = () => {
   if (subcategoryTitle === "Тодорхойгүй")
     return (
       <section className="w-full flex text-black flex-col pt-[80px] h-screen bg-white">
+        <Header tableid={tableid} merchantid={merchantid} />
         <div className="w-full h-screen flex flex-row justify-center px-5 items-center">
           <svg
             className="mr-3 size-10 animate-spin"
@@ -65,6 +67,7 @@ const page = () => {
 
   return (
     <section className="w-full flex text-black flex-col pt-[80px] h-fit bg-white">
+      <Header tableid={tableid} merchantid={merchantid} />
       <div className="w-full h-fit flex flex-row justify-between px-5 items-center">
         <Link
           href={`/table/${tableid}/${merchantid}`}
