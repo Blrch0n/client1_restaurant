@@ -14,27 +14,28 @@ const MenuTypes = ({ foodType, setFoodType, merchantid }) => {
         setIsLoading,
       });
     }
-    setFoodType(datas[0]?._id);
+    setFoodType("all");
   }, [isLoading]);
+  if (isLoading) return <div></div>;
+
+  const filterData = [{ title: "All", _id: "all" }, ...datas];
 
   return (
     <div className="w-full h-fit flex flex-row overflow-x-auto scrollbar-hide gap-0">
-      {datas
-        // .filter((data) => data?.title)
-        .map((data, index) => (
-          <button
-            key={index}
-            onClick={() => setFoodType(data._id)}
-            className="w-fit py-[7px] px-[15px] font-roboto text-[14px] flex-shrink-0 rounded-full duration-200 ease-in-out"
-            style={{
-              backgroundColor: foodType === data._id ? "#ff4301" : "",
-              color: foodType === data._id ? "white" : "#333",
-            }}
-          >
-            {data.title.charAt(0).toUpperCase() +
-              data.title.slice(1).toLowerCase()}
-          </button>
-        ))}
+      {filterData.map((data, index) => (
+        <button
+          key={index}
+          onClick={() => setFoodType(data._id)}
+          className="w-fit py-[7px] px-[15px] font-roboto text-[14px] flex-shrink-0 rounded-full duration-200 ease-in-out"
+          style={{
+            backgroundColor: foodType === data._id ? "#ff4301" : "",
+            color: foodType === data._id ? "white" : "#333",
+          }}
+        >
+          {data.title.charAt(0).toUpperCase() +
+            data.title.slice(1).toLowerCase()}
+        </button>
+      ))}
     </div>
   );
 };

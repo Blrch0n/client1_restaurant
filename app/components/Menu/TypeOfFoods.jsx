@@ -30,7 +30,12 @@ const TypeOfFoods = ({ foodType, merchantid, tableid }) => {
       </div>
     );
 
-  const filteredFoods = datas.filter((d) => d.subcategory === foodType);
+  const filteredFoods = datas.filter((d) => {
+    if (foodType === "all") {
+      return true; // Keep all items
+    }
+    return d.subcategory === foodType;
+  });
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {filteredFoods.length === 0 ? (

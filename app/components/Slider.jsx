@@ -95,7 +95,7 @@ export default function SimpleSlider({ merchantid, tableid }) {
               className="relative w-full h-[230px] sm:h-[300px] lg:h-[500px] cursor-pointer rounded-[8px] overflow-hidden"
             >
               <img
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0  bg-cover bg-no-repeat bg-center"
                 src={
                   data.image === "no-jpg" || data.image === "no-png"
                     ? "/foodimage.jpg"
