@@ -6,27 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import apiData from "@/utils/apiData";
 import axios from "axios";
 
-const mockSliderData = [
-  {
-    title: "Special Offer",
-    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
-    image: "/foodimage.jpg",
-    button_label: "Яг одоо захиал",
-  },
-  {
-    title: "New Collection",
-    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
-    image: "/foodimage.jpg",
-    button_label: "Яг одоо захиал",
-  },
-  {
-    title: "Limited Edition",
-    description: "Алдаж болохгүй! Хямдралтай бүтээгдэхүүн",
-    image: "/foodimage.jpg",
-    button_label: "Яг одоо захиал",
-  },
-];
-
 export default function SimpleSlider({ merchantid, tableid }) {
   const sliderRef = useRef(null);
   const [datas, setDatas] = useState([]);
@@ -90,7 +69,12 @@ export default function SimpleSlider({ merchantid, tableid }) {
         </ul>
       </div>
     ),
-    customPaging: () => <button className="dot" />,
+    customPaging: () => (
+      <button
+        className="dot"
+        style={{ background: "transparent", border: "none" }}
+      />
+    ),
   };
 
   return (
@@ -112,13 +96,12 @@ export default function SimpleSlider({ merchantid, tableid }) {
             >
               <img
                 className="absolute inset-0 bg-cover bg-center"
-                src={data.image && apiData.file_api_url + data.image}
+                src={
+                  data.image === "no-jpg" || data.image === "no-png"
+                    ? "/foodimage.jpg"
+                    : apiData.file_api_url + data.image
+                }
               />
-              {/* <img
-                src={data.image && apiData.file_api_url + data.image}
-                alt=""
-              /> */}
-
               <div className="absolute inset-0 bg-black/50" />
               <div className="relative z-10 flex flex-col items-center justify-center gap-2 h-full text-white text-center px-6">
                 <h1 className=" font-berkshire-swash text-2xl font-bold">
