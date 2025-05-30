@@ -70,12 +70,12 @@ const page = () => {
           className="w-full rounded-[8px] h-auto md:w-[20vw]"
         />
         <div className="mt-4 space-y-2">
-          <h1 className="text-xl font-bold text-[#333]">{item.title}</h1>
+          <h1 className="text-xl font-bold text-[#333]">Нэр: {item.title}</h1>
           <p className="text-lg text-[#ff4301] font-semibold">
-            {new Intl.NumberFormat("en-US").format(item.price)}₮
+            Үнэ: {new Intl.NumberFormat("en-US").format(item.price)}₮
           </p>
           <p className="text-sm text-[#888]">
-            {item.description || "Тайлбар алга."}
+            Тайлбар: {item.description || "Тайлбар алга."}
           </p>
           <button
             onClick={handleAdd}

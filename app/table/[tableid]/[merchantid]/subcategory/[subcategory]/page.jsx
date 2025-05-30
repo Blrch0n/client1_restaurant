@@ -83,9 +83,9 @@ const page = () => {
         </h1>
       </div>
 
-      <div className="w-full min-h-screen h-fit grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:grid-cols-4  gap-4 px-5 py-5 pb-7">
+      <div className="w-full min-h-[80vh] h-fit grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:grid-cols-4  gap-4 px-5 py-5 pb-7">
         {filteredFoods.length === 0 ? (
-          <div className="col-span-full text-center py-8 text-gray-500">
+          <div className="col-span-full flex w-full h-full items-center justify-center text-center py-8 text-gray-500">
             Энэ дэд ангилалд хоол байхгүй байна.
           </div>
         ) : (
