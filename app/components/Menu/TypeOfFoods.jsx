@@ -37,7 +37,7 @@ const TypeOfFoods = ({ foodType, subFoodType, merchantid, tableid }) => {
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {filteredFoods.length === 0 ? (
         <div className="col-span-full text-center py-28 text-gray-500">
-          Энэ ангилалд хоол байхгүй байна.
+          Энэ дэд ангилалд хоол байхгүй байна.
         </div>
       ) : (
         filteredFoods.map((d) => (
