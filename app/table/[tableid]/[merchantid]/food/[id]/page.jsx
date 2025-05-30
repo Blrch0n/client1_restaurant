@@ -55,7 +55,7 @@ const page = () => {
   return (
     <>
       <Header tableid={tableid} merchantid={merchantid} />
-      <section className="w-full h-fit min-h-screen flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] bg-white">
+      <section className="w-full h-fit min-h-[80vh] flex font-roboto text-black flex-col px-5 pb-5 pt-[80px] bg-white">
         <Link
           href={`/table/${tableid}/${merchantid}`}
           className="flex items-center mb-4 gap-2"
