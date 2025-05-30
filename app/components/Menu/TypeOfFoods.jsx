@@ -3,7 +3,7 @@ import FoodCard from "../Cart/FoodCard";
 import { useEffect, useState } from "react";
 import getRequest from "@/utils/getRequest";
 
-const TypeOfFoods = ({ foodType, merchantid, tableid }) => {
+const TypeOfFoods = ({ foodType, subFoodType, merchantid, tableid }) => {
   const [datas, setDatas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,10 +31,7 @@ const TypeOfFoods = ({ foodType, merchantid, tableid }) => {
     );
 
   const filteredFoods = datas.filter((d) => {
-    if (foodType === "all") {
-      return true; // Keep all items
-    }
-    return d.subcategory === foodType;
+    return d.subcategory === subFoodType;
   });
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

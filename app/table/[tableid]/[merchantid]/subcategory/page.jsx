@@ -53,7 +53,7 @@ const Page = () => {
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-berkshire-swash text-[#333]">
-          Ангилал:
+          Дэд ангилал:
           <span className="text-[#ff4101] font-semibold">Бүгд</span>
         </h1>
       </div>

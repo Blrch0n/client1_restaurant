@@ -9,16 +9,16 @@ const MenuTypes = ({ foodType, setFoodType, merchantid }) => {
   useEffect(() => {
     if (isLoading && merchantid) {
       getRequest({
-        route: `subcategory?user=${merchantid}`,
+        route: `category/merchant/${merchantid}`,
         setValue: setDatas,
         setIsLoading,
       });
     }
-    setFoodType("all");
+    setFoodType(datas[0]?._id);
   }, [isLoading]);
   if (isLoading) return <div></div>;
 
-  const filterData = [{ title: "All", _id: "all" }, ...datas];
+  const filterData = [...datas];
 
   return (
     <div className="w-full h-fit flex flex-row overflow-x-auto scrollbar-hide gap-0">

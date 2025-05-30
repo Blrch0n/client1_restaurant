@@ -8,16 +8,19 @@ import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Page = () => {
-  const { category , merchantid , tableid} = useParams();
-  const [isLoading ,setIsLoading] = useState(true)
-  const [datas , setDatas] = useState([])
-  
-    useEffect(() => {
-      if(isLoading){
-        getRequest({route: `product?user=${merchantid}` , setValue:setDatas , setIsLoading})
-      }
-    },[isLoading])
+  const { category, merchantid, tableid } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [datas, setDatas] = useState([]);
 
+  useEffect(() => {
+    if (isLoading) {
+      getRequest({
+        route: `product?user=${merchantid}`,
+        setValue: setDatas,
+        setIsLoading,
+      });
+    }
+  }, [isLoading]);
 
   return (
     <section className="w-full flex text-black flex-col px-5 pt-[80px] h-fit bg-white">
@@ -26,7 +29,7 @@ const Page = () => {
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-roboto text-[#333]">
-          Ангилал:
+          Дэд ангилал:
           <span className="text-[#ff4101] font-semibold">
             {category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()}
           </span>

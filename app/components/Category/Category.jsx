@@ -24,7 +24,7 @@ const Category = ({ merchantid, tableid }) => {
       <div className="w-full h-fit p-5 pb-7 flex flex-col gap-3">
         <div className="w-full flex justify-between items-center">
           <h1 className="font-berkshire-swash text-[#333] font-semibold text-[18px]">
-            Ангилал
+            Дэд ангилал
           </h1>
         </div>
         <div className="w-full h-fit flex items-center justify-center">
@@ -44,7 +44,7 @@ const Category = ({ merchantid, tableid }) => {
     <div className="w-full h-fit p-5 pb-7 flex flex-col gap-3">
       <div className="w-full flex justify-between items-center">
         <h1 className="font-berkshire-swash text-[#333] font-semibold text-[18px]">
-          Ангилал
+          Дэд ангилал
         </h1>
         <Link
           href={`/table/${tableid}/${merchantid}/subcategory`}

@@ -76,7 +76,7 @@ const page = () => {
           <IoMdArrowRoundBack className="text-[20px] text-[#ff4101] cursor-pointer" />
         </Link>
         <h1 className="text-lg font-roboto text-[#333]">
-          Ангилал:
+          Дэд ангилал:
           <span className="text-[#ff4101] font-semibold">
             {subcategoryTitle}
           </span>
@@ -86,7 +86,7 @@ const page = () => {
       <div className="w-full min-h-screen h-fit grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:grid-cols-4  gap-4 px-5 py-5 pb-7">
         {filteredFoods.length === 0 ? (
           <div className="col-span-full text-center py-8 text-gray-500">
-            Энэ ангилалд хоол байхгүй байна.
+            Энэ дэд ангилалд хоол байхгүй байна.
           </div>
         ) : (
           filteredFoods.map((d) => (
